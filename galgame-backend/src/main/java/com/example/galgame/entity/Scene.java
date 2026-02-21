@@ -26,4 +26,45 @@ public class Scene {
 
     @Column(name = "next_scene", length = 50)
     private String nextScene;
+
+    // Getter and Setter methods
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
+    }
+
+    public String getSceneKey() {
+        return sceneKey;
+    }
+
+    public void setSceneKey(String sceneKey) {
+        this.sceneKey = sceneKey;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getNextScene() {
+        return nextScene;
+    }
+
+    public void setNextScene(String nextScene) {
+        this.nextScene = nextScene;
+    }
 }
