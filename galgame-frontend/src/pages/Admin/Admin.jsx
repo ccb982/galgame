@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { createGame } from '../../api/game';
 
 const Admin = () => {
   const [game, setGame] = useState({
@@ -14,11 +15,27 @@ const Admin = () => {
     setGame(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // 这里应该调用 API 上传游戏
-    console.log('Game submitted:', game);
-    alert('游戏上传成功');
+    
+    try {
+      if (!game.title) {
+        alert('请输入游戏标题');
+        return;
+      }
+      
+      await createGame({
+        ...game,
+        status: 1,
+        createdAt: new Date()
+      });
+      
+      setGame({ title: '', coverUrl: '', description: '', tags: '' });
+      alert('游戏上传成功');
+    } catch (error) {
+      console.error('游戏上传失败:', error);
+      alert('游戏上传失败，请重试');
+    }
   };
 
   return (
