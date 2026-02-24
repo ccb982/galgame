@@ -8,3 +8,5 @@ import org.springframework.data.domain.Pageable;
 public interface GameRepository extends JpaRepository<Game, Long> {
     Page<Game> findByStatus(Integer status, Pageable pageable);
 }
+
+//获取游戏列表
