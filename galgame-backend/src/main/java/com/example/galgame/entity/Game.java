@@ -29,9 +29,9 @@ public class Game {
     private String tags;
 
     @Column(name = "status", nullable = false, columnDefinition = "TINYINT DEFAULT 1")
-    private Integer status;
+    private Integer status = 1;
 
     @Column(name = "created_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    private Date createdAt = new Date();
 }
