@@ -12,6 +12,14 @@ export const createGame = (game) => {
   return axiosInstance.post('/games', game);
 };
 
+export const createGameWithUpload = (formData) => {
+  return axiosInstance.post('/games/upload', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+};
+
 export const deleteGame = (id) => {
   return axiosInstance.delete(`/games/${id}`);
 };

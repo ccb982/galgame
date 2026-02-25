@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { createGame } from '../../api/game';
+import { createGame, createGameWithUpload } from '../../api/game';
 import { createScene } from '../../api/scene';
 
 const Admin = () => {
@@ -16,6 +16,7 @@ const Admin = () => {
   const [loadingGames, setLoadingGames] = useState(false);
   const [selectedGameId, setSelectedGameId] = useState('');
   const [scriptFile, setScriptFile] = useState(null);
+  const [coverFile, setCoverFile] = useState(null);
 
   const checkGameHasScenes = async (gameId) => {
     try {
@@ -67,15 +68,22 @@ const Admin = () => {
         return;
       }
       
-      await createGame({
-        ...game,
-        status: 1,
-        createdAt: new Date()
-      });
+      const formData = new FormData();
+      formData.append('title', game.title);
+      formData.append('description', game.description);
+      formData.append('tags', game.tags);
+      
+      if (coverFile) {
+        formData.append('coverFile', coverFile);
+      } else if (game.coverUrl) {
+        formData.append('coverUrl', game.coverUrl);
+      }
+      
+      await createGameWithUpload(formData);
       
       setGame({ title: '', coverUrl: '', description: '', tags: '' });
+      setCoverFile(null);
       alert('游戏上传成功');
-      // 上传成功后重新获取游戏列表
       fetchGames();
     } catch (error) {
       console.error('游戏上传失败:', error);
@@ -172,14 +180,29 @@ const Admin = () => {
               />
             </div>
             <div>
-              <label className="block text-gray-300 mb-2">封面 URL</label>
-              <input 
-                type="text" 
-                name="coverUrl" 
-                value={game.coverUrl} 
-                onChange={handleInputChange} 
-                className="w-full bg-gray-700 text-white p-2 rounded"
-              />
+              <label className="block text-gray-300 mb-2">封面图片</label>
+              <div className="flex gap-4">
+                <div className="flex-1">
+                  <label className="block text-gray-400 text-sm mb-1">上传图片</label>
+                  <input 
+                    type="file" 
+                    accept="image/*"
+                    className="w-full bg-gray-700 text-white p-2 rounded"
+                    onChange={(e) => setCoverFile(e.target.files[0])}
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="block text-gray-400 text-sm mb-1">或输入图片URL</label>
+                  <input 
+                    type="text" 
+                    name="coverUrl" 
+                    value={game.coverUrl} 
+                    onChange={handleInputChange} 
+                    className="w-full bg-gray-700 text-white p-2 rounded"
+                    placeholder="https://example.com/image.jpg"
+                  />
+                </div>
+              </div>
             </div>
             <div className="md:col-span-2">
               <label className="block text-gray-300 mb-2">游戏简介</label>

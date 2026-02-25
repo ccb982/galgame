@@ -39,4 +39,20 @@ public class Game {
     protected void onCreate() {
         createdAt = new Date();
     }
+    
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
 }

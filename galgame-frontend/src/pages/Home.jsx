@@ -5,21 +5,34 @@ import { getGames } from '../api/game';
 const Home = () => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalElements, setTotalElements] = useState(0);
+
+  const fetchGames = async (page = 0) => {
+    try {
+      setLoading(true);
+      const response = await getGames(page, 10);
+      setGames(response.data.content);
+      setCurrentPage(response.data.number);
+      setTotalPages(response.data.totalPages);
+      setTotalElements(response.data.totalElements);
+    } catch (error) {
+      console.error('Error fetching games:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const response = await getGames();
-        setGames(response.data.content);
-      } catch (error) {
-        console.error('Error fetching games:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchGames();
   }, []);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 0 && newPage < totalPages) {
+      fetchGames(newPage);
+    }
+  };
 
   if (loading) {
     return <div className="flex justify-center items-center h-screen">Loading...</div>;
@@ -28,6 +41,11 @@ const Home = () => {
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-4xl font-bold mb-10 text-center">Galgame 游戏库</h1>
+      
+      <div className="mb-4 text-gray-400 text-center">
+        共 {totalElements} 个游戏，第 {currentPage + 1} 页，共 {totalPages} 页
+      </div>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {games.map((game) => (
           <div key={game.id} className="bg-gray-800 rounded-lg overflow-hidden">
@@ -59,6 +77,42 @@ const Home = () => {
           </div>
         ))}
       </div>
+      
+      {totalPages > 1 && (
+        <div className="mt-10 flex justify-center items-center gap-4">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 0}
+            className="bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed text-white px-4 py-2 rounded"
+          >
+            上一页
+          </button>
+          
+          <div className="flex gap-2">
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i}
+                onClick={() => handlePageChange(i)}
+                className={`px-4 py-2 rounded ${
+                  currentPage === i
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-700 hover:bg-gray-600 text-white'
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
+          
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages - 1}
+            className="bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed text-white px-4 py-2 rounded"
+          >
+            下一页
+          </button>
+        </div>
+      )}
     </div>
   );
 };
