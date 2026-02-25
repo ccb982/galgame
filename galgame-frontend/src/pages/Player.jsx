@@ -261,14 +261,15 @@ const Player = () => {
       
       {/* 文本框 */}
       <div 
-        className="absolute z-20 flex items-center justify-center"
+        className="absolute z-20 flex items-end justify-center"
         style={{
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
           margin: 0,
-          padding: 0
+          padding: 0,
+          paddingBottom: '2rem'
         }}
       >
         <div 
@@ -280,15 +281,19 @@ const Player = () => {
           }}
         >
           <div 
-            className="bg-gradient-to-r from-black/90 via-black/80 to-black/90 backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl p-6 transition-all duration-500"
+            className="backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl p-6 transition-all duration-500"
             style={{
               margin: 0,
-              padding: '1.5rem'
+              padding: '1.5rem',
+              background: 'rgba(0, 0, 0, 0.8)'
             }}
           >
             {/* 文本内容 */}
             <div className="mb-6 text-center">
-              <p className="text-xl md:text-2xl text-white leading-relaxed font-light tracking-wide">
+              <p 
+                className="text-xl md:text-2xl leading-relaxed tracking-wide"
+                style={{ fontWeight: 'bold', color: '#ffffff' }}
+              >
                 {sceneContent.text}
               </p>
             </div>
@@ -320,14 +325,6 @@ const Player = () => {
                 >
                   保存
                 </button>
-                <div className="flex-grow flex justify-center">
-                  <button
-                    onClick={handleNextScene}
-                    className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg text-lg transition-all duration-300 transform hover:scale-105"
-                  >
-                    继续
-                  </button>
-                </div>
                 <Link 
                   to={`/game/${gameId}`} 
                   className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
