@@ -21,7 +21,7 @@ public class Scene {
     @Column(name = "scene_key", nullable = false, length = 50)
     private String sceneKey;
 
-    @Column(name = "content", nullable = false, columnDefinition = "JSON")
+    @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     private String content;
 
     @Column(name = "next_scene", length = 50)
