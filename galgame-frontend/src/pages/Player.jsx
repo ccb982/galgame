@@ -313,19 +313,21 @@ const Player = () => {
                 ))}
               </div>
             ) : (
-              <div className="flex flex-wrap justify-center items-center gap-6">
+              <div className="flex flex-wrap justify-between items-center gap-4">
                 <button
                   onClick={handleSave}
                   className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
                 >
                   保存
                 </button>
-                <button
-                  onClick={handleNextScene}
-                  className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg text-lg transition-all duration-300 transform hover:scale-105"
-                >
-                  继续
-                </button>
+                <div className="flex-grow flex justify-center">
+                  <button
+                    onClick={handleNextScene}
+                    className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg text-lg transition-all duration-300 transform hover:scale-105"
+                  >
+                    继续
+                  </button>
+                </div>
                 <Link 
                   to={`/game/${gameId}`} 
                   className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
