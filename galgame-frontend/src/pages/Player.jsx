@@ -71,14 +71,27 @@ const Player = () => {
     fetchScene();
   }, [gameId, sceneKey]);
 
+  // 场景切换状态
+  const [isChangingScene, setIsChangingScene] = useState(false);
+
   const handleNextScene = () => {
     if (scene?.nextScene) {
-      setSceneKey(scene.nextScene);
+      // 添加场景切换动画
+      setIsChangingScene(true);
+      setTimeout(() => {
+        setSceneKey(scene.nextScene);
+        setIsChangingScene(false);
+      }, 500);
     }
   };
 
   const handleOptionClick = (nextScene) => {
-    setSceneKey(nextScene);
+    // 添加场景切换动画
+    setIsChangingScene(true);
+    setTimeout(() => {
+      setSceneKey(nextScene);
+      setIsChangingScene(false);
+    }, 500);
   };
 
   const handleSave = async () => {
@@ -186,70 +199,159 @@ const Player = () => {
         zIndex: 1
       }}
     >
+      {/* 场景切换过渡动画 */}
+      {isChangingScene && (
+        <div 
+          className="absolute inset-0 bg-black z-50 transition-opacity duration-500"
+          style={{ opacity: 1, animation: 'fadeInOut 1s ease-in-out' }}
+        ></div>
+      )}
       {/* 背景图 */}
       {sceneContent?.bg && (
-        <div className="absolute inset-0">
-          <img 
-            src={sceneContent.bg} 
-            alt="背景" 
-            className="w-full h-full object-cover"
-          />
+        <div className="absolute inset-0 overflow-hidden">
+          {/* 背景图片 */}
+          <div className="absolute inset-0 blur-sm">
+            <img 
+              src={sceneContent.bg} 
+              alt="背景" 
+              className="w-full h-full object-cover scale-105"
+            />
+          </div>
+          {/* 渐变叠加层 */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60"></div>
         </div>
+      )}
+      {/* 默认背景 */}
+      {!sceneContent?.bg && (
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-gray-800"></div>
       )}
 
       {/* 立绘 */}
       {sceneContent?.characters && sceneContent.characters.map((character, index) => (
-        <div key={index} className={`absolute ${character.position === 'left' ? 'left-10' : 'right-10'} bottom-20`}>
-          <img 
-            src={character.image} 
-            alt={character.name} 
-            className="h-64 object-contain"
-          />
+        <div 
+          key={index} 
+          className={`absolute ${character.position === 'left' ? 'left-8' : 'right-8'} bottom-40 z-10 transition-all duration-1000 ease-out transform`}
+          style={{
+            animation: `float ${3 + index * 0.5}s ease-in-out infinite alternate`,
+            opacity: 0,
+            animationDelay: `${index * 0.3}s`
+          }}
+          onLoad={(e) => {
+            e.currentTarget.style.opacity = 1;
+          }}
+        >
+          <div className="relative">
+            {/* 立绘图片 */}
+            <img 
+              src={character.image} 
+              alt={character.name} 
+              className="h-72 object-contain drop-shadow-2xl"
+            />
+            {/* 立绘名字 */}
+            {character.name && (
+              <div className="absolute -bottom-8 left-0 right-0 flex justify-center">
+                <div className="bg-black/80 text-white px-4 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
+                  {character.name}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       ))}
+      
+      {/* 动画关键帧 */}
+      <style jsx>{`
+        @keyframes float {
+          0% {
+            transform: translateY(0px);
+          }
+          100% {
+            transform: translateY(-10px);
+          }
+        }
+      `}</style>
 
       {/* 文本框 */}
-      <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 p-6">
-        <div className="container mx-auto">
-          <p className="text-xl mb-6">{sceneContent.text}</p>
-          
-          {/* 选项 */}
-          {sceneContent?.options && sceneContent.options.length > 0 ? (
-            <div className="flex flex-col gap-3">
-              {sceneContent.options.map((option, index) => (
+      <div className="absolute bottom-0 left-0 right-0 z-20">
+        <div className="max-w-4xl mx-auto px-6 pb-8 pt-12">
+          <div className="bg-gradient-to-r from-black/90 via-black/80 to-black/90 backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl p-6 transition-all duration-500">
+            {/* 文本内容 */}
+            <div className="mb-6">
+              <p className="text-xl md:text-2xl text-white leading-relaxed font-light tracking-wide">
+                {sceneContent.text}
+              </p>
+            </div>
+            
+            {/* 选项 */}
+            {sceneContent?.options && sceneContent.options.length > 0 ? (
+              <div className="flex flex-col gap-4">
+                {sceneContent.options.map((option, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleOptionClick(option.next)}
+                    className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-xl text-left transition-all duration-300 transform hover:-translate-y-1 border border-white/20 backdrop-blur-sm"
+                    style={{
+                      opacity: 0,
+                      animation: `fadeIn ${0.5}s ease-out forwards`,
+                      animationDelay: `${index * 0.2}s`
+                    }}
+                  >
+                    <span className="inline-block mr-3 text-yellow-400">▶</span>
+                    {option.text}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-wrap justify-between items-center gap-4">
                 <button
-                  key={index}
-                  onClick={() => handleOptionClick(option.next)}
-                  className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded text-left"
+                  onClick={handleSave}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
                 >
-                  {option.text}
+                  保存
                 </button>
-              ))}
-            </div>
-          ) : (
-            <div className="flex justify-between items-center">
-              <button
-                onClick={handleSave}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
-              >
-                保存
-              </button>
-              <button
-                onClick={handleNextScene}
-                className="bg-green-600 hover:bg-green-700 text-white px-8 py-2 rounded text-lg"
-              >
-                继续
-              </button>
-              <Link 
-                to={`/game/${gameId}`} 
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
-              >
-                退出
-              </Link>
-            </div>
-          )}
+                <button
+                  onClick={handleNextScene}
+                  className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg text-lg transition-all duration-300 transform hover:scale-105"
+                >
+                  继续
+                </button>
+                <Link 
+                  to={`/game/${gameId}`} 
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
+                >
+                  退出
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
+      
+      {/* 动画关键帧 */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes fadeInOut {
+          0% {
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+          }
+        }
+      `}</style>
     </div>
   );
 };
