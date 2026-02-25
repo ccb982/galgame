@@ -259,24 +259,35 @@ const Player = () => {
         </div>
       ))}
       
-      {/* 动画关键帧 */}
-      <style jsx>{`
-        @keyframes float {
-          0% {
-            transform: translateY(0px);
-          }
-          100% {
-            transform: translateY(-10px);
-          }
-        }
-      `}</style>
-
       {/* 文本框 */}
-      <div className="absolute bottom-0 left-0 right-0 z-20">
-        <div className="max-w-4xl mx-auto px-6 pb-8 pt-12">
-          <div className="bg-gradient-to-r from-black/90 via-black/80 to-black/90 backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl p-6 transition-all duration-500">
+      <div 
+        className="absolute z-20 flex items-center justify-center"
+        style={{
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          margin: 0,
+          padding: 0
+        }}
+      >
+        <div 
+          style={{
+            maxWidth: '4xl',
+            width: '90%',
+            margin: '0 auto',
+            padding: '1.5rem'
+          }}
+        >
+          <div 
+            className="bg-gradient-to-r from-black/90 via-black/80 to-black/90 backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl p-6 transition-all duration-500"
+            style={{
+              margin: 0,
+              padding: '1.5rem'
+            }}
+          >
             {/* 文本内容 */}
-            <div className="mb-6">
+            <div className="mb-6 text-center">
               <p className="text-xl md:text-2xl text-white leading-relaxed font-light tracking-wide">
                 {sceneContent.text}
               </p>
@@ -284,12 +295,12 @@ const Player = () => {
             
             {/* 选项 */}
             {sceneContent?.options && sceneContent.options.length > 0 ? (
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col items-center gap-4">
                 {sceneContent.options.map((option, index) => (
                   <button
                     key={index}
                     onClick={() => handleOptionClick(option.next)}
-                    className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-xl text-left transition-all duration-300 transform hover:-translate-y-1 border border-white/20 backdrop-blur-sm"
+                    className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-xl text-center transition-all duration-300 transform hover:-translate-y-1 border border-white/20 backdrop-blur-sm w-full max-w-md"
                     style={{
                       opacity: 0,
                       animation: `fadeIn ${0.5}s ease-out forwards`,
@@ -302,7 +313,7 @@ const Player = () => {
                 ))}
               </div>
             ) : (
-              <div className="flex flex-wrap justify-between items-center gap-4">
+              <div className="flex flex-wrap justify-center items-center gap-6">
                 <button
                   onClick={handleSave}
                   className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
@@ -329,6 +340,15 @@ const Player = () => {
       
       {/* 动画关键帧 */}
       <style jsx>{`
+        @keyframes float {
+          0% {
+            transform: translateY(0px);
+          }
+          100% {
+            transform: translateY(-10px);
+          }
+        }
+        
         @keyframes fadeIn {
           0% {
             opacity: 0;
