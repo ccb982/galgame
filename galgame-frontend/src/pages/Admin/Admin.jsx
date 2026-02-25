@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { createGame } from '../../api/game';
+import { createScene } from '../../api/scene';
 
 const Admin = () => {
   const [game, setGame] = useState({
@@ -9,6 +10,35 @@ const Admin = () => {
     description: '',
     tags: ''
   });
+  
+  // 新增状态变量
+  const [games, setGames] = useState([]);
+  const [loadingGames, setLoadingGames] = useState(false);
+  const [selectedGameId, setSelectedGameId] = useState('');
+  const [scriptFile, setScriptFile] = useState(null);
+
+  // 新增函数：获取游戏列表
+  const fetchGames = async () => {
+    try {
+      setLoadingGames(true);
+      const response = await fetch('http://localhost:8080/api/games');
+      if (!response.ok) {
+        throw new Error('Failed to fetch games');
+      }
+      const data = await response.json();
+      setGames(data.content || data);
+    } catch (error) {
+      console.error('Error fetching games:', error);
+      alert('获取游戏列表失败');
+    } finally {
+      setLoadingGames(false);
+    }
+  };
+
+  // 组件挂载时获取游戏列表
+  useEffect(() => {
+    fetchGames();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -32,9 +62,68 @@ const Admin = () => {
       
       setGame({ title: '', coverUrl: '', description: '', tags: '' });
       alert('游戏上传成功');
+      // 上传成功后重新获取游戏列表
+      fetchGames();
     } catch (error) {
       console.error('游戏上传失败:', error);
       alert('游戏上传失败，请重试');
+    }
+  };
+
+  // 新增函数：处理剧本上传
+  const handleScriptUpload = async (e) => {
+    e.preventDefault();
+    
+    try {
+      if (!selectedGameId) {
+        alert('请选择游戏');
+        return;
+      }
+      
+      if (!scriptFile) {
+        alert('请上传剧本文件');
+        return;
+      }
+      
+      // 读取文件内容
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        try {
+          const scriptContent = JSON.parse(event.target.result);
+          
+          if (!scriptContent.scenes || !Array.isArray(scriptContent.scenes)) {
+            alert('剧本格式错误：缺少scenes数组');
+            return;
+          }
+          
+          // 批量创建场景
+          for (const scene of scriptContent.scenes) {
+            await createScene(selectedGameId, {
+              sceneKey: scene.sceneKey,
+              content: JSON.stringify(scene.content),
+              nextScene: scene.nextScene
+            });
+          }
+          
+          alert('剧本上传成功');
+          setSelectedGameId('');
+          setScriptFile(null);
+          // 重置文件输入
+          e.target.reset();
+        } catch (error) {
+          console.error('Error parsing script:', error);
+          alert('解析剧本文件失败');
+        }
+      };
+      
+      reader.onerror = () => {
+        alert('读取文件失败');
+      };
+      
+      reader.readAsText(scriptFile);
+    } catch (error) {
+      console.error('Error uploading script:', error);
+      alert('剧本上传失败');
     }
   };
 
@@ -106,12 +195,24 @@ const Admin = () => {
 
       <div className="mt-10 bg-gray-800 p-6 rounded-lg">
         <h2 className="text-2xl font-bold mb-6">导入剧本</h2>
-        <form>
+        <form onSubmit={handleScriptUpload}>
           <div className="mb-6">
             <label className="block text-gray-300 mb-2">选择游戏</label>
-            <select className="w-full bg-gray-700 text-white p-2 rounded">
+            <select 
+              className="w-full bg-gray-700 text-white p-2 rounded"
+              value={selectedGameId}
+              onChange={(e) => setSelectedGameId(e.target.value)}
+            >
               <option value="">请选择游戏</option>
-              {/* 这里应该从 API 获取游戏列表 */}
+              {loadingGames ? (
+                <option value="">加载中...</option>
+              ) : (
+                games.map(gameItem => (
+                  <option key={gameItem.id} value={gameItem.id}>
+                    {gameItem.title}
+                  </option>
+                ))
+              )}
             </select>
           </div>
           <div className="mb-6">
@@ -120,6 +221,7 @@ const Admin = () => {
               type="file" 
               accept=".json" 
               className="w-full bg-gray-700 text-white p-2 rounded"
+              onChange={(e) => setScriptFile(e.target.files[0])}
             />
           </div>
           <div className="flex justify-center">
