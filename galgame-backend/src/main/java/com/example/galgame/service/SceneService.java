@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,6 +17,10 @@ public class SceneService {
 
     public Optional<Scene> getSceneByGameIdAndSceneKey(Long gameId, String sceneKey) {
         return sceneRepository.findByGameIdAndSceneKey(gameId, sceneKey);
+    }
+
+    public List<Scene> getScenesByGameId(Long gameId) {
+        return sceneRepository.findByGameId(gameId);
     }
 
     public Scene saveScene(Scene scene) {

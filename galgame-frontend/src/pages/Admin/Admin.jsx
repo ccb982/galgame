@@ -17,7 +17,20 @@ const Admin = () => {
   const [selectedGameId, setSelectedGameId] = useState('');
   const [scriptFile, setScriptFile] = useState(null);
 
-  // 新增函数：获取游戏列表
+  const checkGameHasScenes = async (gameId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/games/${gameId}/scenes`);
+      if (!response.ok) {
+        throw new Error('Failed to check scenes');
+      }
+      const data = await response.json();
+      return data.length > 0;
+    } catch (error) {
+      console.error('Error checking scenes:', error);
+      return false;
+    }
+  };
+
   const fetchGames = async () => {
     try {
       setLoadingGames(true);
@@ -77,6 +90,12 @@ const Admin = () => {
     try {
       if (!selectedGameId) {
         alert('请选择游戏');
+        return;
+      }
+      
+      const hasScenes = await checkGameHasScenes(selectedGameId);
+      if (hasScenes) {
+        alert('该游戏已经存在剧本，不能重复上传');
         return;
       }
       
