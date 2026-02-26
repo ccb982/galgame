@@ -1,0 +1,147 @@
+{
+  "scenes": [
+    {
+      "sceneKey": "start",
+      "content": {
+        "text": "你醒来发现自己在一个陌生的房间里，四周一片漆黑。记忆一片模糊，只记得自己是来参加一个神秘的游戏测试。",
+        "bg": "https://neeko-copilot.bytedance.net/api/text2image?prompt=a%20dark%20mysterious%20room%20with%20dim%20lighting&size=1920x1080",
+        "characters": []
+      },
+      "nextScene": "room"
+    },
+    {
+      "sceneKey": "room",
+      "content": {
+        "text": "房间里有一扇门和一扇窗户。门上有一个密码锁，窗户被厚重的窗帘遮挡着。",
+        "bg": "https://neeko-copilot.bytedance.net/api/text2image?prompt=a%20room%20with%20a%20door%20and%20window%20curtains&size=1920x1080",
+        "characters": [],
+        "options": [
+          {
+            "text": "检查门",
+            "next": "door"
+          },
+          {
+            "text": "拉开窗帘",
+            "next": "window"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "door",
+      "content": {
+        "text": "门上的密码锁需要四位数字密码。你注意到旁边的桌子上有一张纸条，上面写着：\"密码是你出生的月份和日期。\"",
+        "bg": "https://neeko-copilot.bytedance.net/api/text2image?prompt=a%20door%20with%20combination%20lock%20and%20table&size=1920x1080",
+        "characters": []
+      },
+      "nextScene": "password"
+    },
+    {
+      "sceneKey": "window",
+      "content": {
+        "text": "你拉开窗帘，发现外面是一片荒凉的景象，似乎是一个废弃的建筑区。窗户被从外面锁住了，无法打开。",
+        "bg": "https://neeko-copilot.bytedance.net/api/text2image?prompt=abandoned%20buildings%20outside%20window&size=1920x1080",
+        "characters": []
+      },
+      "nextScene": "room"
+    },
+    {
+      "sceneKey": "password",
+      "content": {
+        "text": "你输入了密码，门发出了咔嗒一声，成功打开了。门外是一条长长的走廊，两边有多个房间。",
+        "bg": "https://neeko-copilot.bytedance.net/api/text2image?prompt=a%20long%20corridor%20with%20rooms&size=1920x1080",
+        "characters": [],
+        "options": [
+          {
+            "text": "向左走",
+            "next": "left"
+          },
+          {
+            "text": "向右走",
+            "next": "right"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "left",
+      "content": {
+        "text": "你选择了向左走，来到了一个实验室。里面有各种奇怪的设备和电脑。电脑屏幕上显示着一些代码。",
+        "bg": "https://neeko-copilot.bytedance.net/api/text2image?prompt=a%20sci-fi%20laboratory%20with%20computers&size=1920x1080",
+        "characters": [
+          {
+            "name": "研究员",
+            "image": "https://neeko-copilot.bytedance.net/api/text2image?prompt=a%20scientist%20in%20lab%20coat&size=800x1200",
+            "position": "left"
+          }
+        ],
+        "options": [
+          {
+            "text": "查看电脑",
+            "next": "computer"
+          },
+          {
+            "text": "离开实验室",
+            "next": "password"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "right",
+      "content": {
+        "text": "你选择了向右走，来到了一个控制室。里面有一个大屏幕，显示着整个建筑的布局。",
+        "bg": "https://neeko-copilot.bytedance.net/api/text2image?prompt=a%20control%20room%20with%20big%20screen&size=1920x1080",
+        "characters": [],
+        "options": [
+          {
+            "text": "查看屏幕",
+            "next": "screen"
+          },
+          {
+            "text": "离开控制室",
+            "next": "password"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "computer",
+      "content": {
+        "text": "电脑上显示着一个游戏测试的界面，上面写着：\"测试完成，恭喜你通过了所有关卡。\"突然，房间的灯光亮起，你听到了掌声。",
+        "bg": "https://neeko-copilot.bytedance.net/api/text2image?prompt=a%20computer%20screen%20showing%20game%20completed&size=1920x1080",
+        "characters": [
+          {
+            "name": "研究员",
+            "image": "https://neeko-copilot.bytedance.net/api/text2image?prompt=a%20scientist%20clapping%20hands&size=800x1200",
+            "position": "left"
+          }
+        ]
+      },
+      "nextScene": "end"
+    },
+    {
+      "sceneKey": "screen",
+      "content": {
+        "text": "屏幕上显示着整个建筑的布局，你发现这是一个专门用于游戏测试的设施。突然，屏幕上出现了一行字：\"测试完成，恭喜你通过了所有关卡。\"",
+        "bg": "https://neeko-copilot.bytedance.net/api/text2image?prompt=a%20control%20room%20screen%20showing%20building%20layout&size=1920x1080",
+        "characters": []
+      },
+      "nextScene": "end"
+    },
+    {
+      "sceneKey": "end",
+      "content": {
+        "text": "灯光亮起，你发现自己回到了最初的测试房间。一位穿着白大褂的人走进来，恭喜你完成了游戏测试，并解释说这是一个虚拟现实游戏的测试。你感觉这个经历非常真实，仿佛真的经历了一场冒险。",
+        "bg": "https://neeko-copilot.bytedance.net/api/text2image?prompt=a%20bright%20test%20room%20with%20scientist&size=1920x1080",
+        "characters": [
+          {
+            "name": "测试主管",
+            "image": "https://neeko-copilot.bytedance.net/api/text2image?prompt=a%20professional%20test%20director&size=800x1200",
+            "position": "right"
+          }
+        ]
+      }
+    }
+  ]
+}

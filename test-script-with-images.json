@@ -1,0 +1,450 @@
+{
+  "scenes": [
+    {
+      "sceneKey": "start",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "text": "欢迎来到奇幻世界！你是一位勇敢的冒险者，正站在一个神秘的森林入口。",
+        "options": [
+          {
+            "text": "进入森林",
+            "next": "forest"
+          },
+          {
+            "text": "查看地图",
+            "next": "map"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "forest",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1448375240586-dfd8d395ea6c?w=1920",
+        "text": "你进入了一片神秘的森林，树木高耸入云，阳光透过树叶洒下斑驳的光影。突然，你遇到了一位精灵少女。",
+        "characters": [
+          {
+            "name": "精灵莉亚",
+            "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800",
+            "position": "left"
+          }
+        ],
+        "options": [
+          {
+            "text": "向精灵问好",
+            "next": "elf_greeting"
+          },
+          {
+            "text": "继续前进",
+            "next": "deep_forest"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "map",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920",
+        "text": "你拿出地图查看，发现这片区域有三个主要地点：神秘森林、古老城堡和魔法湖泊。",
+        "options": [
+          {
+            "text": "前往森林",
+            "next": "forest"
+          },
+          {
+            "text": "前往城堡",
+            "next": "castle"
+          },
+          {
+            "text": "前往湖泊",
+            "next": "lake"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "elf_greeting",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1448375240586-dfd8d395ea6c?w=1920",
+        "text": "精灵莉亚微笑着向你打招呼：'你好，人类冒险者。这片森林是我们的家园，请小心前进，里面有许多危险。'",
+        "characters": [
+          {
+            "name": "精灵莉亚",
+            "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800",
+            "position": "left"
+          }
+        ],
+        "options": [
+          {
+            "text": "询问森林的危险",
+            "next": "forest_dangers"
+          },
+          {
+            "text": "感谢她的提醒",
+            "next": "deep_forest"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "deep_forest",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1920",
+        "text": "你深入森林，周围变得越来越暗。突然，一只巨大的狼人出现在你面前！",
+        "characters": [
+          {
+            "name": "狼人",
+            "image": "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "战斗",
+            "next": "battle"
+          },
+          {
+            "text": "逃跑",
+            "next": "forest_exit"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "castle",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "text": "你来到了一座古老的城堡前，城堡高耸入云，散发着神秘的气息。",
+        "options": [
+          {
+            "text": "进入城堡",
+            "next": "castle_inside"
+          },
+          {
+            "text": "环绕城堡",
+            "next": "castle_surroundings"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "lake",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920",
+        "text": "你来到了一片美丽的魔法湖泊，湖水清澈见底，湖边开满了鲜艳的花朵。",
+        "options": [
+          {
+            "text": "在湖边休息",
+            "next": "lake_rest"
+          },
+          {
+            "text": "探索湖泊",
+            "next": "lake_explore"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "forest_dangers",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1448375240586-dfd8d395ea6c?w=1920",
+        "text": "精灵莉亚告诉你：'森林深处有狼人、巨蟒和迷路的幽灵。如果你遇到危险，可以吹响这个哨子，我们会赶来帮助你。'她递给你一个精美的银哨。",
+        "characters": [
+          {
+            "name": "精灵莉亚",
+            "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800",
+            "position": "left"
+          }
+        ],
+        "options": [
+          {
+            "text": "感谢她的礼物",
+            "next": "deep_forest"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "battle",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=1920",
+        "text": "你拔出武器，准备与狼人战斗。经过一番激烈的搏斗，你成功击败了狼人！",
+        "characters": [
+          {
+            "name": "狼人",
+            "image": "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "继续前进",
+            "next": "forest_treasure"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "forest_exit",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "text": "你成功逃离了森林，回到了最初的出发点。虽然有些狼狈，但你保住了性命。",
+        "options": [
+          {
+            "text": "重新进入森林",
+            "next": "forest"
+          },
+          {
+            "text": "前往城堡",
+            "next": "castle"
+          },
+          {
+            "text": "前往湖泊",
+            "next": "lake"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "forest_treasure",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1448375240586-dfd8d395ea6c?w=1920",
+        "text": "在击败狼人的地方，你发现了一个隐藏的宝箱。打开后，里面装满了金币和魔法物品！",
+        "options": [
+          {
+            "text": "继续探索",
+            "next": "castle"
+          },
+          {
+            "text": "返回村庄",
+            "next": "end"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "castle_inside",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "text": "你进入了城堡内部，发现这是一座废弃的城堡。大厅中央有一个古老的王座，上面坐着一位沉睡的国王。",
+        "characters": [
+          {
+            "name": "沉睡的国王",
+            "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "唤醒国王",
+            "next": "king_awake"
+          },
+          {
+            "text": "探索城堡",
+            "next": "castle_explore"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "king_awake",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "text": "国王缓缓睁开眼睛，惊讶地看着你：'已经过了这么多年了...谢谢你唤醒我，勇敢的冒险者。我是这个王国的国王，被邪恶的巫师诅咒陷入沉睡。'",
+        "characters": [
+          {
+            "name": "觉醒的国王",
+            "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "询问诅咒的详情",
+            "next": "curse_story"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "curse_story",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "text": "国王讲述了一个悲伤的故事：'邪恶的巫师为了夺取我的王位，用黑魔法诅咒了我。只有找到传说中的光明宝石，才能打破诅咒。你愿意帮助我吗？'",
+        "characters": [
+          {
+            "name": "觉醒的国王",
+            "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "接受任务",
+            "next": "accept_quest"
+          },
+          {
+            "text": "拒绝任务",
+            "next": "end"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "accept_quest",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "text": "国王感激地看着你：'谢谢你，勇敢的冒险者！光明宝石位于魔法湖泊的深处，那里有强大的守护者。请务必小心！'",
+        "characters": [
+          {
+            "name": "觉醒的国王",
+            "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "前往魔法湖泊",
+            "next": "lake"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "castle_surroundings",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "text": "你环绕城堡探索，发现城堡周围有一片美丽的花园，花园里开满了奇异的花朵。",
+        "options": [
+          {
+            "text": "进入城堡",
+            "next": "castle_inside"
+          },
+          {
+            "text": "返回",
+            "next": "start"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "castle_explore",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "text": "你探索了城堡的各个角落，发现了很多古老的文物和魔法物品。在图书馆里，你找到了一本关于光明宝石的古籍。",
+        "options": [
+          {
+            "text": "阅读古籍",
+            "next": "read_book"
+          },
+          {
+            "text": "返回大厅",
+            "next": "castle_inside"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "read_book",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "text": "古籍记载：'光明宝石是世界上最强大的魔法物品之一，能够驱散一切黑暗。它位于魔法湖泊的深处，由水龙守护。'",
+        "options": [
+          {
+            "text": "前往魔法湖泊",
+            "next": "lake"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "lake_rest",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920",
+        "text": "你在湖边休息，享受着宁静的时光。湖水轻轻拍打着岸边，微风拂过你的脸庞。",
+        "options": [
+          {
+            "text": "探索湖泊",
+            "next": "lake_explore"
+          },
+          {
+            "text": "返回",
+            "next": "start"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "lake_explore",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920",
+        "text": "你开始探索湖泊，突然，一条巨大的水龙从湖中升起！它守护着光明宝石。",
+        "characters": [
+          {
+            "name": "水龙",
+            "image": "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "与水龙战斗",
+            "next": "dragon_battle"
+          },
+          {
+            "text": "尝试沟通",
+            "next": "dragon_talk"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "dragon_battle",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920",
+        "text": "你与水龙展开了激烈的战斗！经过一番苦战，你终于击败了水龙，获得了光明宝石！",
+        "characters": [
+          {
+            "name": "水龙",
+            "image": "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "返回城堡",
+            "next": "castle_inside"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "dragon_talk",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920",
+        "text": "水龙看着你，眼中闪烁着智慧的光芒：'我守护光明宝石已经数百年了。只有真正勇敢和善良的人才能获得它。你证明了自己的品质。'它将宝石交给了你。",
+        "characters": [
+          {
+            "name": "水龙",
+            "image": "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "感谢水龙",
+            "next": "castle_inside"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "end",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "text": "你带着光明宝石返回城堡，打破了诅咒。国王感激地封你为王国骑士，你的名字将永远被铭记！",
+        "options": []
+      }
+    }
+  ]
+}
