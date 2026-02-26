@@ -40,6 +40,34 @@ public class Game {
         createdAt = new Date();
     }
     
+    public Long getId() {
+        return id;
+    }
+    
+    public String getTitle() {
+        return title;
+    }
+    
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public String getTags() {
+        return tags;
+    }
+    
+    public Integer getStatus() {
+        return status;
+    }
+    
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+    
     public void setTitle(String title) {
         this.title = title;
     }
@@ -54,5 +82,13 @@ public class Game {
     
     public void setTags(String tags) {
         this.tags = tags;
+    }
+    
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+    
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
