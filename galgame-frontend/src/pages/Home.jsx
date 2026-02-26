@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getGames } from '../api/game';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+
 const Home = () => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,7 +53,7 @@ const Home = () => {
           <div key={game.id} className="bg-gray-800 rounded-lg overflow-hidden">
             <div className="h-48 bg-gray-700 flex items-center justify-center">
               {game.coverUrl ? (
-                <img src={game.coverUrl} alt={game.title} className="w-full h-full object-cover" />
+                <img src={`${API_BASE_URL}${game.coverUrl}`} alt={game.title} className="w-full h-full object-cover" />
               ) : (
                 <div className="text-gray-400">无封面</div>
               )}

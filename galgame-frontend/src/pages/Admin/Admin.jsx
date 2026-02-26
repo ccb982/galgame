@@ -20,7 +20,7 @@ const Admin = () => {
 
   const checkGameHasScenes = async (gameId) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/games/${gameId}/scenes`);
+      const response = await fetch(`http://localhost:8080/games/${gameId}/scenes`);
       if (!response.ok) {
         throw new Error('Failed to check scenes');
       }
@@ -35,7 +35,7 @@ const Admin = () => {
   const fetchGames = async () => {
     try {
       setLoadingGames(true);
-      const response = await fetch('http://localhost:8080/api/games');
+      const response = await fetch('http://localhost:8080/games');
       if (!response.ok) {
         throw new Error('Failed to fetch games');
       }

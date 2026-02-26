@@ -13,5 +13,9 @@ logs/
 .env
 
 # 上传文件目录（保留.gitkeep）
-uploads/*
-!uploads/.gitkeep
+uploads/images/**/*.jpg
+uploads/images/**/*.jpeg
+uploads/images/**/*.png
+uploads/images/**/*.webp
+uploads/images/**/*.gif
+!uploads/images/**/.gitkeep
