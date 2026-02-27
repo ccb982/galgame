@@ -19,3 +19,14 @@ uploads/images/**/*.png
 uploads/images/**/*.webp
 uploads/images/**/*.gif
 !uploads/images/**/.gitkeep
+
+# covers 目录完全忽略
+uploads/images/covers/
+
+# scenes/characters 目录允许追踪（包括图片）
+!uploads/images/scenes/characters/
+!uploads/images/scenes/characters/*.jpg
+!uploads/images/scenes/characters/*.jpeg
+!uploads/images/scenes/characters/*.png
+!uploads/images/scenes/characters/*.webp
+!uploads/images/scenes/characters/*.gif
