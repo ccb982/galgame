@@ -1,0 +1,590 @@
+{
+  "scenes": [
+    {
+      "sceneKey": "start",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "text": "指挥官，欢迎来到铁锈战争的战场！\n这里是前线指挥部，敌军正在集结，我们需要你的指挥才能取得胜利。",
+        "characters": [
+          {
+            "name": "基础机甲",
+            "image": "/uploads/images/scenes/characters/47982733-a03a-473a-8628-dcfec368a1a6.png",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "了解当前战况",
+            "next": "briefing"
+          },
+          {
+            "text": "直接开始战斗",
+            "next": "battle_start"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "briefing",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920",
+        "text": "基础机甲：'报告指挥官！目前我方基地位于东部高地，敌军主力正在西面集结。'\n基础机甲：'根据侦察，敌军拥有大量装甲单位，我们需要做好充分准备。'",
+        "characters": [
+          {
+            "name": "基础机甲",
+            "image": "/uploads/images/scenes/characters/47982733-a03a-473a-8628-dcfec368a1a6.png",
+            "position": "left"
+          }
+        ],
+        "options": [
+          {
+            "text": "我方有哪些单位可用？",
+            "next": "units_intro"
+          },
+          {
+            "text": "直接部署防御",
+            "next": "defense_deploy"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "units_intro",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920",
+        "text": "基础机甲：'报告指挥官！目前我方可调动的作战单位如下：'\n基础机甲：'重型坦克小姐 - 地面主力，火力强大但机动性一般。'\n基础机甲：'猛犸坦克小姐 - 重装单位，双管火炮，防御力极高。'\n基础机甲：'等离子坦克小姐 - 高科技单位，等离子武器威力惊人。'\n基础机甲：'武装直升机小姐 - 空中支援，机动性强，可对地攻击。'",
+        "characters": [
+          {
+            "name": "基础机甲",
+            "image": "/uploads/images/scenes/characters/47982733-a03a-473a-8628-dcfec368a1a6.png",
+            "position": "left"
+          }
+        ],
+        "options": [
+          {
+            "text": "很好，开始部署！",
+            "next": "defense_deploy"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "defense_deploy",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1517649763962-0c623066050b?w=1920",
+        "text": "各单位注意！指挥官下达部署命令！\n重型坦克和猛犸坦克负责正面防线，等离子坦克提供火力支援，武装直升机负责侦察和快速反应。",
+        "characters": [
+          {
+            "name": "重型坦克",
+            "image": "/uploads/images/scenes/characters/6757aca6-c7d4-44ee-94db-a98d7259f1ab.png",
+            "position": "left"
+          },
+          {
+            "name": "猛犸坦克",
+            "image": "/uploads/images/scenes/characters/1d793dfa-f0de-4233-a9fe-60f40788bc7c.png",
+            "position": "center"
+          },
+          {
+            "name": "等离子坦克",
+            "image": "/uploads/images/scenes/characters/02af157b-0dee-4205-81db-36f99dfab350.png",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "各单位报告状态",
+            "next": "status_report"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "status_report",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1517649763962-0c623066050b?w=1920",
+        "text": "重型坦克：'重型坦克报告！主炮装填完毕，随时可以开火！'\n猛犸坦克：'猛犸坦克就位！我的装甲可以承受任何攻击！'\n等离子坦克：'等离子系统充能完成，等待射击指令。'",
+        "characters": [
+          {
+            "name": "重型坦克",
+            "image": "/uploads/images/scenes/characters/6757aca6-c7d4-44ee-94db-a98d7259f1ab.png",
+            "position": "left"
+          },
+          {
+            "name": "猛犸坦克",
+            "image": "/uploads/images/scenes/characters/1d793dfa-f0de-4233-a9fe-60f40788bc7c.png",
+            "position": "center"
+          },
+          {
+            "name": "等离子坦克",
+            "image": "/uploads/images/scenes/characters/02af157b-0dee-4205-81db-36f99dfab350.png",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "武装直升机，侦察情况如何？",
+            "next": "heli_report"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "heli_report",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=1920",
+        "text": "武装直升机：'报告指挥官！我从空中侦察到敌军动向！'\n武装直升机：'敌方大约有两个装甲连队正在向我方推进，预计十分钟后接触！'\n武装直升机：'另外，我发现敌军后方有一座能源设施，如果能够摧毁它，将大大削弱敌军战斗力！'",
+        "characters": [
+          {
+            "name": "武装直升机",
+            "image": "/uploads/images/scenes/characters/700aafa8-4e2a-4240-bc2d-d31c1d8e25ec.png",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "先防守基地，稳扎稳打",
+            "next": "defensive_strategy"
+          },
+          {
+            "text": "派遣突击队摧毁能源设施",
+            "next": "offensive_strategy"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "defensive_strategy",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1517649763962-0c623066050b?w=1920",
+        "text": "指挥官决定采取防御策略！\n所有单位构筑防线，准备迎接敌军进攻！",
+        "characters": [
+          {
+            "name": "重型坦克",
+            "image": "/uploads/images/scenes/characters/6757aca6-c7d4-44ee-94db-a98d7259f1ab.png",
+            "position": "left"
+          },
+          {
+            "name": "猛犸坦克",
+            "image": "/uploads/images/scenes/characters/1d793dfa-f0de-4233-a9fe-60f40788bc7c.png",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "准备战斗！",
+            "next": "battle_start"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "offensive_strategy",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=1920",
+        "text": "指挥官决定主动出击！\n武装直升机：'明白！我将带领机动部队突袭敌方能源设施！'\n等离子坦克：'我请求加入突击队，我的等离子武器对付建筑非常有效！'",
+        "characters": [
+          {
+            "name": "武装直升机",
+            "image": "/uploads/images/scenes/characters/700aafa8-4e2a-4240-bc2d-d31c1d8e25ec.png",
+            "position": "left"
+          },
+          {
+            "name": "等离子坦克",
+            "image": "/uploads/images/scenes/characters/02af157b-0dee-4205-81db-36f99dfab350.png",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "批准！突击队出发！",
+            "next": "assault_mission"
+          },
+          {
+            "text": "等等，还是先防守吧",
+            "next": "defensive_strategy"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "assault_mission",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920",
+        "text": "突击队正在穿越敌后...\n武装直升机：'注意！前方发现敌方巡逻队！'\n等离子坦克：'交给我吧！'",
+        "characters": [
+          {
+            "name": "武装直升机",
+            "image": "/uploads/images/scenes/characters/700aafa8-4e2a-4240-bc2d-d31c1d8e25ec.png",
+            "position": "left"
+          },
+          {
+            "name": "等离子坦克",
+            "image": "/uploads/images/scenes/characters/02af157b-0dee-4205-81db-36f99dfab350.png",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "等离子坦克，开火！",
+            "next": "plasma_attack"
+          },
+          {
+            "text": "武装直升机，进行空中打击！",
+            "next": "heli_attack"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "plasma_attack",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920",
+        "text": "等离子坦克：'等离子炮，发射！'\n一道耀眼的蓝色光束划破天际，敌方巡逻队瞬间被消灭！\n武装直升机：'漂亮！继续前进，能源设施就在前方！'",
+        "characters": [
+          {
+            "name": "等离子坦克",
+            "image": "/uploads/images/scenes/characters/02af157b-0dee-4205-81db-36f99dfab350.png",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "继续前进",
+            "next": "energy_facility"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "heli_attack",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=1920",
+        "text": "武装直升机：'收到！火箭弹发射！'\n武装直升机从空中发起精准打击，敌方巡逻队被消灭！\n等离子坦克：'空中支援果然高效！我们继续前进吧！'",
+        "characters": [
+          {
+            "name": "武装直升机",
+            "image": "/uploads/images/scenes/characters/700aafa8-4e2a-4240-bc2d-d31c1d8e25ec.png",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "继续前进",
+            "next": "energy_facility"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "energy_facility",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920",
+        "text": "突击队抵达敌方能源设施！\n武装直升机：'就是这里！这座设施为敌军前线提供能源补给！'\n等离子坦克：'只要摧毁它，敌军的战斗力将大幅下降！'",
+        "characters": [
+          {
+            "name": "武装直升机",
+            "image": "/uploads/images/scenes/characters/700aafa8-4e2a-4240-bc2d-d31c1d8e25ec.png",
+            "position": "left"
+          },
+          {
+            "name": "等离子坦克",
+            "image": "/uploads/images/scenes/characters/02af157b-0dee-4205-81db-36f99dfab350.png",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "全力攻击！",
+            "next": "destroy_facility"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "destroy_facility",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920",
+        "text": "等离子坦克和武装直升机同时发起攻击！\n巨大的爆炸声响彻云霄，能源设施化为一片火海！\n武装直升机：'目标摧毁！任务完成！'",
+        "characters": [
+          {
+            "name": "武装直升机",
+            "image": "/uploads/images/scenes/characters/700aafa8-4e2a-4240-bc2d-d31c1d8e25ec.png",
+            "position": "left"
+          },
+          {
+            "name": "等离子坦克",
+            "image": "/uploads/images/scenes/characters/02af157b-0dee-4205-81db-36f99dfab350.png",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "返回基地支援主战场",
+            "next": "return_to_base"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "return_to_base",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1517649763962-0c623066050b?w=1920",
+        "text": "突击队返回基地！\n与此同时，主战场已经陷入激战！\n重型坦克：'指挥官！敌军攻势猛烈！我们需要支援！'",
+        "characters": [
+          {
+            "name": "重型坦克",
+            "image": "/uploads/images/scenes/characters/6757aca6-c7d4-44ee-94db-a98d7259f1ab.png",
+            "position": "left"
+          },
+          {
+            "name": "猛犸坦克",
+            "image": "/uploads/images/scenes/characters/1d793dfa-f0de-4233-a9fe-60f40788bc7c.png",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "突击队，立即支援前线！",
+            "next": "battle_start"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "battle_start",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1517649763962-0c623066050b?w=1920",
+        "text": "战斗开始！敌军装甲部队向我方阵地发起猛烈进攻！\n重型坦克：'发现敌方坦克！距离2000米！'\n猛犸坦克：'我来挡住他们！'",
+        "characters": [
+          {
+            "name": "重型坦克",
+            "image": "/uploads/images/scenes/characters/6757aca6-c7d4-44ee-94db-a98d7259f1ab.png",
+            "position": "left"
+          },
+          {
+            "name": "猛犸坦克",
+            "image": "/uploads/images/scenes/characters/1d793dfa-f0de-4233-a9fe-60f40788bc7c.png",
+            "position": "center"
+          },
+          {
+            "name": "基础机甲",
+            "image": "/uploads/images/scenes/characters/47982733-a03a-473a-8628-dcfec368a1a6.png",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "重型坦克，瞄准敌方首领！",
+            "next": "heavy_tank_attack"
+          },
+          {
+            "text": "猛犸坦克，推进防线！",
+            "next": "mammoth_advance"
+          },
+          {
+            "text": "基础机甲，侧翼包抄！",
+            "next": "mecha_flank"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "heavy_tank_attack",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1517649763962-0c623066050b?w=1920",
+        "text": "重型坦克：'收到！锁定敌方首领！'\n轰！一发精准的炮弹击中敌方指挥坦克！\n重型坦克：'命中！敌方指挥系统陷入混乱！'",
+        "characters": [
+          {
+            "name": "重型坦克",
+            "image": "/uploads/images/scenes/characters/6757aca6-c7d4-44ee-94db-a98d7259f1ab.png",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "趁胜追击！",
+            "next": "push_forward"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "mammoth_advance",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1517649763962-0c623066050b?w=1920",
+        "text": "猛犸坦克：'明白！双管火炮，全速前进！'\n猛犸坦克如同一座移动堡垒，碾压过敌方防线！\n猛犸坦克：'没有人能阻挡我的前进！'",
+        "characters": [
+          {
+            "name": "猛犸坦克",
+            "image": "/uploads/images/scenes/characters/1d793dfa-f0de-4233-a9fe-60f40788bc7c.png",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "继续推进！",
+            "next": "push_forward"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "mecha_flank",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1517649763962-0c623066050b?w=1920",
+        "text": "基础机甲：'收到！执行侧翼机动！'\n基础机甲快速移动到敌方侧翼，发起突袭！\n基础机甲：'发现敌方弱点！正在攻击！'",
+        "characters": [
+          {
+            "name": "基础机甲",
+            "image": "/uploads/images/scenes/characters/47982733-a03a-473a-8628-dcfec368a1a6.png",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "全军突击！",
+            "next": "push_forward"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "push_forward",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1517649763962-0c623066050b?w=1920",
+        "text": "我军发起全面反攻！\n敌军开始溃退，胜利在望！\n武装直升机：'指挥官！我从空中发现敌军正在撤退！'\n等离子坦克：'要追击吗？'",
+        "characters": [
+          {
+            "name": "武装直升机",
+            "image": "/uploads/images/scenes/characters/700aafa8-4e2a-4240-bc2d-d31c1d8e25ec.png",
+            "position": "left"
+          },
+          {
+            "name": "等离子坦克",
+            "image": "/uploads/images/scenes/characters/02af157b-0dee-4205-81db-36f99dfab350.png",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "追击！彻底消灭敌军！",
+            "next": "final_chase"
+          },
+          {
+            "text": "巩固阵地，打扫战场",
+            "next": "consolidate"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "final_chase",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=1920",
+        "text": "全军追击！\n武装直升机在空中追击撤退的敌军！\n等离子坦克和重型坦克在地面上推进！\n敌军完全溃败，战场被我军控制！",
+        "characters": [
+          {
+            "name": "武装直升机",
+            "image": "/uploads/images/scenes/characters/700aafa8-4e2a-4240-bc2d-d31c1d8e25ec.png",
+            "position": "left"
+          },
+          {
+            "name": "重型坦克",
+            "image": "/uploads/images/scenes/characters/6757aca6-c7d4-44ee-94db-a98d7259f1ab.png",
+            "position": "center"
+          },
+          {
+            "name": "等离子坦克",
+            "image": "/uploads/images/scenes/characters/02af157b-0dee-4205-81db-36f99dfab350.png",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "胜利！",
+            "next": "victory"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "consolidate",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1517649763962-0c623066050b?w=1920",
+        "text": "我军巩固阵地，打扫战场。\n猛犸坦克：'战斗结束，我方损失轻微。'\n基础机甲：'正在清点战利品，发现大量敌方装备！'",
+        "characters": [
+          {
+            "name": "猛犸坦克",
+            "image": "/uploads/images/scenes/characters/1d793dfa-f0de-4233-a9fe-60f40788bc7c.png",
+            "position": "left"
+          },
+          {
+            "name": "基础机甲",
+            "image": "/uploads/images/scenes/characters/47982733-a03a-473a-8628-dcfec368a1a6.png",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "干得好，大家！",
+            "next": "victory"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "victory",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-1517649763962-0c623066050b?w=1920",
+        "text": "战斗胜利！\n所有作战单位集合！\n重型坦克：'感谢指挥官的英明指挥！'\n猛犸坦克：'这场胜利属于我们所有人！'\n等离子坦克：'下次战斗，我还会继续战斗！'\n武装直升机：'随时待命，指挥官！'\n基础机甲：'铁锈军团，战无不胜！'",
+        "characters": [
+          {
+            "name": "重型坦克",
+            "image": "/uploads/images/scenes/characters/6757aca6-c7d4-44ee-94db-a98d7259f1ab.png",
+            "position": "left"
+          },
+          {
+            "name": "猛犸坦克",
+            "image": "/uploads/images/scenes/characters/1d793dfa-f0de-4233-a9fe-60f40788bc7c.png",
+            "position": "center"
+          },
+          {
+            "name": "等离子坦克",
+            "image": "/uploads/images/scenes/characters/02af157b-0dee-4205-81db-36f99dfab350.png",
+            "position": "right"
+          }
+        ],
+        "options": [
+          {
+            "text": "继续战斗",
+            "next": "start"
+          },
+          {
+            "text": "结束游戏",
+            "next": "ending"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "ending",
+      "content": {
+        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "text": "感谢游玩铁锈战争 - 娘化版！\n指挥官，期待下次与你的相遇！\n铁锈军团，永远忠诚！",
+        "characters": [
+          {
+            "name": "基础机甲",
+            "image": "/uploads/images/scenes/characters/47982733-a03a-473a-8628-dcfec368a1a6.png",
+            "position": "center"
+          }
+        ],
+        "options": [
+          {
+            "text": "重新开始",
+            "next": "start"
+          }
+        ]
+      }
+    }
+  ]
+}
