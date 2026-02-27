@@ -25,12 +25,14 @@ const Character = ({ character, index }) => {
 
   const characterUrl = getCharacterUrl(character.image);
 
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
   return (
     <div 
       className={`absolute ${character.position === 'left' ? 'left-8' : 'right-8'} bottom-40 z-10 transition-all duration-1000 ease-out transform`}
       style={{
         animation: `float ${3 + index * 0.5}s ease-in-out infinite alternate`,
-        opacity: 0,
+        opacity: isLoaded ? 1 : 0,
         animationDelay: `${index * 0.3}s`
       }}
     >
@@ -40,11 +42,14 @@ const Character = ({ character, index }) => {
           src={characterUrl} 
           alt={character.name} 
           className="h-72 object-contain drop-shadow-2xl"
-          onLoad={(e) => {
-            e.currentTarget.style.opacity = 1;
+          onLoad={() => {
+            setIsLoaded(true);
             console.log('✅ 角色图片加载成功:', character.name, characterUrl);
           }}
-          onError={(error) => console.error('❌ 角色图片加载失败:', error, character.name, characterUrl)}
+          onError={(error) => {
+            setIsLoaded(true); // 即使加载失败也显示容器，避免元素不显示
+            console.error('❌ 角色图片加载失败:', error, character.name, characterUrl);
+          }}
         />
         {/* 角色名字 */}
         {character.name && (
