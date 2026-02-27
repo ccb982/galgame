@@ -30,3 +30,7 @@ uploads/images/covers/
 !uploads/images/scenes/characters/*.png
 !uploads/images/scenes/characters/*.webp
 !uploads/images/scenes/characters/*.gif
+
+# 特定文件不追踪
+uploads/images/scenes/characters/305ef4c0-1ba1-48f2-9267-5ec37076271f.png
+uploads/images/scenes/characters/e15dc78d-be1e-4674-b652-17538071d9aa.png
