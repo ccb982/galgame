@@ -1,0 +1,64 @@
+{
+  "scenes": [
+    {
+      "sceneKey": "start",
+      "content": {
+        "bg": "http://localhost:8080/uploads/images/scenes/backgrounds/b41d7e73-8cb2-4234-bde2-4fd3c40488d4.webp",
+        "text": "旁白：你站在神秘城堡的大门前，大门紧闭，周围是茂密的森林。\n主角：这座城堡看起来已经废弃很久了，但是我感觉里面有什么在召唤我。",
+        "options": [
+          {
+            "text": "进入城堡",
+            "next": "entrance"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "entrance",
+      "content": {
+        "bg": "http://localhost:8080/uploads/images/scenes/backgrounds/b41d7e73-8cb2-4234-bde2-4fd3c40488d4.webp",
+        "text": "主角：我尝试推了推城堡的大门，没想到它居然轻易地打开了。\n旁白：大门发出吱呀的声音，里面一片漆黑，只有微弱的光线从高处的窗户透进来。",
+        "options": [
+          {
+            "text": "进入大厅",
+            "next": "hall"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "hall",
+      "content": {
+        "bg": "http://localhost:8080/uploads/images/scenes/backgrounds/b41d7e73-8cb2-4234-bde2-4fd3c40488d4.webp",
+        "text": "主角：大厅里布满了灰尘，墙上挂着古老的画像，地面上有一些奇怪的符号。\n旁白：你注意到大厅中央有一个奇怪的石台，上面似乎有什么东西在发光。",
+        "options": [
+          {
+            "text": "走近石台",
+            "next": "石台"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "石台",
+      "content": {
+        "bg": "http://localhost:8080/uploads/images/scenes/backgrounds/b41d7e73-8cb2-4234-bde2-4fd3c40488d4.webp",
+        "text": "主角：我走近石台，发现上面放着一个古老的盒子，盒子上刻着神秘的图案。\n旁白：当你触碰盒子时，突然感到一股强大的力量从盒子中涌出，你的眼前一黑...",
+        "options": [
+          {
+            "text": "继续",
+            "next": "ending"
+          }
+        ]
+      }
+    },
+    {
+      "sceneKey": "ending",
+      "content": {
+        "bg": "http://localhost:8080/uploads/images/scenes/backgrounds/b41d7e73-8cb2-4234-bde2-4fd3c40488d4.webp",
+        "text": "旁白：当你醒来时，发现自己已经在城堡外了。盒子不见了，但是你感觉自己获得了某种特殊的能力。\n主角：这次冒险改变了我的一生，我永远不会忘记这座神秘的城堡。",
+        "options": []
+      }
+    }
+  ]
+}

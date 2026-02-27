@@ -3,6 +3,7 @@ import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { getScene } from '../api/scene';
 import { createSave } from '../api/save';
 import { useGameStore } from '../stores/useGameStore';
+import Background from '../components/Background';
 
 const Player = () => {
   const { gameId } = useParams();
@@ -196,7 +197,7 @@ const Player = () => {
         padding: 0,
         display: 'block',
         overflow: 'hidden',
-        zIndex: 1
+        zIndex: 0
       }}
     >
       {/* 场景切换过渡动画 */}
@@ -207,24 +208,7 @@ const Player = () => {
         ></div>
       )}
       {/* 背景图 */}
-      {sceneContent?.bg && (
-        <div className="absolute inset-0 overflow-hidden">
-          {/* 背景图片 */}
-          <div className="absolute inset-0 blur-sm">
-            <img 
-              src={sceneContent.bg} 
-              alt="背景" 
-              className="w-full h-full object-cover scale-105"
-            />
-          </div>
-          {/* 渐变叠加层 */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60"></div>
-        </div>
-      )}
-      {/* 默认背景 */}
-      {!sceneContent?.bg && (
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-gray-800"></div>
-      )}
+      <Background bg={sceneContent?.bg} />
 
       {/* 立绘 */}
       {sceneContent?.characters && sceneContent.characters.map((character, index) => (
@@ -243,7 +227,7 @@ const Player = () => {
           <div className="relative">
             {/* 立绘图片 */}
             <img 
-              src={character.image} 
+              src={character.image.startsWith('http') ? character.image : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'}${character.image}`} 
               alt={character.name} 
               className="h-72 object-contain drop-shadow-2xl"
             />

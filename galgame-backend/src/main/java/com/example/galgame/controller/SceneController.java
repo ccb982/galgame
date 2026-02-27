@@ -20,8 +20,9 @@ public class SceneController {
     }
 
     @GetMapping("/{sceneKey}")
-    public Optional<Scene> getScene(@PathVariable Long gameId, @PathVariable String sceneKey) {
-        return sceneService.getSceneByGameIdAndSceneKey(gameId, sceneKey);
+    public Scene getScene(@PathVariable Long gameId, @PathVariable String sceneKey) {
+        return sceneService.getSceneByGameIdAndSceneKey(gameId, sceneKey)
+                .orElseThrow(() -> new RuntimeException("Scene not found"));
     }
 
     @PostMapping

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片上传测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0069d9;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>图片上传测试</h1>
+        
+        <div class="form-group">
+            <h2>上传背景图片</h2>
+            <input type="file" id="backgroundFile" accept="image/*">
+            <button onclick="uploadBackground()">上传背景</button>
+        </div>
+        
+        <div class="form-group">
+            <h2>上传角色图片</h2>
+            <input type="file" id="characterFile" accept="image/*">
+            <button onclick="uploadCharacter()">上传角色</button>
+        </div>
+        
+        <div class="result" id="result">
+            上传结果将显示在这里
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE_URL = 'http://localhost:8080';
+        const gameId = 1;
+        
+        async function uploadBackground() {
+            const file = document.getElementById('backgroundFile').files[0];
+            if (!file) {
+                alert('请选择文件');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/games/${gameId}/scene-images/backgrounds`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                document.getElementById('result').innerHTML = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('result').innerHTML = '错误: ' + error.message;
+            }
+        }
+        
+        async function uploadCharacter() {
+            const file = document.getElementById('characterFile').files[0];
+            if (!file) {
+                alert('请选择文件');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/games/${gameId}/scene-images/characters`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                document.getElementById('result').innerHTML = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('result').innerHTML = '错误: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

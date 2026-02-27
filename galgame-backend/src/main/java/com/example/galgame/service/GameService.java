@@ -25,6 +25,9 @@ public class GameService {
     }
 
     public Game saveGame(Game game) {
+        if (game.getStatus() == null) {
+            game.setStatus(1);
+        }
         return gameRepository.save(game);
     }
 

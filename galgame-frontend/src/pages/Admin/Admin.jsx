@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { createGame, createGameWithUpload } from '../../api/game';
 import { createScene } from '../../api/scene';
+import { uploadBackgroundImage, uploadCharacterImage } from '../../api/sceneImage';
 
 const Admin = () => {
   const [game, setGame] = useState({
@@ -17,10 +18,17 @@ const Admin = () => {
   const [selectedGameId, setSelectedGameId] = useState('');
   const [scriptFile, setScriptFile] = useState(null);
   const [coverFile, setCoverFile] = useState(null);
+  
+  // 新增：场景图片上传状态
+  const [backgroundFile, setBackgroundFile] = useState(null);
+  const [characterFile, setCharacterFile] = useState(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [uploadResult, setUploadResult] = useState(null);
 
   const checkGameHasScenes = async (gameId) => {
     try {
-      const response = await fetch(`http://localhost:8080/games/${gameId}/scenes`);
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+      const response = await fetch(`${apiBaseUrl}/games/${gameId}/scenes`);
       if (!response.ok) {
         throw new Error('Failed to check scenes');
       }
@@ -35,7 +43,9 @@ const Admin = () => {
   const fetchGames = async () => {
     try {
       setLoadingGames(true);
-      const response = await fetch('http://localhost:8080/games');
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+      // 使用较大的size参数获取足够多的游戏
+      const response = await fetch(`${apiBaseUrl}/games?page=0&size=100`);
       if (!response.ok) {
         throw new Error('Failed to fetch games');
       }
@@ -151,6 +161,70 @@ const Admin = () => {
     } catch (error) {
       console.error('Error uploading script:', error);
       alert('剧本上传失败');
+    }
+  };
+  
+  // 新增：上传背景图片
+  const handleBackgroundUpload = async (e) => {
+    e.preventDefault();
+    
+    try {
+      if (!selectedGameId) {
+        alert('请选择游戏');
+        return;
+      }
+      
+      if (!backgroundFile) {
+        alert('请选择背景图片');
+        return;
+      }
+      
+      setUploadingImage(true);
+      const response = await uploadBackgroundImage(selectedGameId, backgroundFile);
+      setUploadResult({
+        type: 'background',
+        url: response.data.imageUrl,
+        fullUrl: `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'}${response.data.imageUrl}`
+      });
+      alert('背景图片上传成功');
+      setBackgroundFile(null);
+    } catch (error) {
+      console.error('上传背景图片失败:', error);
+      alert('上传背景图片失败，请重试');
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+  
+  // 新增：上传角色图片
+  const handleCharacterUpload = async (e) => {
+    e.preventDefault();
+    
+    try {
+      if (!selectedGameId) {
+        alert('请选择游戏');
+        return;
+      }
+      
+      if (!characterFile) {
+        alert('请选择角色图片');
+        return;
+      }
+      
+      setUploadingImage(true);
+      const response = await uploadCharacterImage(selectedGameId, characterFile);
+      setUploadResult({
+        type: 'character',
+        url: response.data.imageUrl,
+        fullUrl: `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'}${response.data.imageUrl}`
+      });
+      alert('角色图片上传成功');
+      setCharacterFile(null);
+    } catch (error) {
+      console.error('上传角色图片失败:', error);
+      alert('上传角色图片失败，请重试');
+    } finally {
+      setUploadingImage(false);
     }
   };
 
@@ -275,6 +349,98 @@ const Admin = () => {
             </button>
           </div>
         </form>
+      </div>
+
+      <div className="mt-10 bg-gray-800 p-6 rounded-lg">
+        <h2 className="text-2xl font-bold mb-6">上传场景图片</h2>
+        
+        <div className="mb-6">
+          <label className="block text-gray-300 mb-2">选择游戏</label>
+          <select 
+            className="w-full bg-gray-700 text-white p-2 rounded"
+            value={selectedGameId}
+            onChange={(e) => setSelectedGameId(e.target.value)}
+          >
+            <option value="">请选择游戏</option>
+            {loadingGames ? (
+              <option value="">加载中...</option>
+            ) : (
+              games.map(gameItem => (
+                <option key={gameItem.id} value={gameItem.id}>
+                  {gameItem.title}
+                </option>
+              ))
+            )}
+          </select>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* 上传背景图片 */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4">上传背景图片</h3>
+            <form onSubmit={handleBackgroundUpload}>
+              <div className="mb-4">
+                <input 
+                  type="file" 
+                  accept="image/*"
+                  className="w-full bg-gray-700 text-white p-2 rounded"
+                  onChange={(e) => setBackgroundFile(e.target.files[0])}
+                  disabled={uploadingImage}
+                />
+              </div>
+              <button 
+                type="submit" 
+                className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white px-4 py-2 rounded"
+                disabled={uploadingImage || !selectedGameId}
+              >
+                {uploadingImage ? '上传中...' : '上传背景图片'}
+              </button>
+            </form>
+          </div>
+
+          {/* 上传角色图片 */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4">上传角色图片</h3>
+            <form onSubmit={handleCharacterUpload}>
+              <div className="mb-4">
+                <input 
+                  type="file" 
+                  accept="image/*"
+                  className="w-full bg-gray-700 text-white p-2 rounded"
+                  onChange={(e) => setCharacterFile(e.target.files[0])}
+                  disabled={uploadingImage}
+                />
+              </div>
+              <button 
+                type="submit" 
+                className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white px-4 py-2 rounded"
+                disabled={uploadingImage || !selectedGameId}
+              >
+                {uploadingImage ? '上传中...' : '上传角色图片'}
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {/* 上传结果 */}
+        {uploadResult && (
+          <div className="mt-6 p-4 bg-gray-700 rounded">
+            <h3 className="text-lg font-semibold mb-2">上传结果</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p className="text-gray-300">图片类型: {uploadResult.type === 'background' ? '背景' : '角色'}</p>
+                <p className="text-gray-300">图片URL: <code className="text-green-400 break-all">{uploadResult.url}</code></p>
+              </div>
+              <div>
+                <img 
+                  src={uploadResult.fullUrl} 
+                  alt={`${uploadResult.type} image`} 
+                  className="max-w-full max-h-40 object-cover rounded"
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

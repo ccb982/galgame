@@ -113,7 +113,7 @@
     {
       "sceneKey": "castle",
       "content": {
-        "bg": "https://images.unsplash.com/photo-15187092688054-9e50e2af4f1a?w=1920",
+        "bg": "/uploads/images/scenes/backgrounds/42e083ec-0389-416e-91d3-1406233bb46b.webp",
         "text": "你来到了一座古老的城堡前，城堡高耸入云，散发着神秘的气息。",
         "options": [
           {
@@ -130,7 +130,7 @@
     {
       "sceneKey": "lake",
       "content": {
-        "bg": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920",
+        "bg": "/uploads/images/scenes/backgrounds/42e083ec-0389-416e-91d3-1406233bb46b.webp",
         "text": "你来到了一片美丽的魔法湖泊，湖水清澈见底，湖边开满了鲜艳的花朵。",
         "options": [
           {
@@ -147,12 +147,12 @@
     {
       "sceneKey": "forest_dangers",
       "content": {
-        "bg": "https://images.unsplash.com/photo-1448375240586-dfd8d395ea6c?w=1920",
+        "bg": "/uploads/images/scenes/backgrounds/42e083ec-0389-416e-91d3-1406233bb46b.webp",
         "text": "精灵莉亚告诉你：'森林深处有狼人、巨蟒和迷路的幽灵。如果你遇到危险，可以吹响这个哨子，我们会赶来帮助你。'她递给你一个精美的银哨。",
         "characters": [
           {
             "name": "精灵莉亚",
-            "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800",
+            "image": "/uploads/images/scenes/backgrounds/42e083ec-0389-416e-91d3-1406233bb46b.webp",
             "position": "left"
           }
         ],
@@ -382,7 +382,7 @@
         "characters": [
           {
             "name": "水龙",
-            "image": "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800",
+            "image": "/uploads/images/scenes/backgrounds/42e083ec-0389-416e-91d3-1406233bb46b.webp",
             "position": "center"
           }
         ],
@@ -401,12 +401,12 @@
     {
       "sceneKey": "dragon_battle",
       "content": {
-        "bg": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920",
+        "bg": "/uploads/images/scenes/backgrounds/42e083ec-0389-416e-91d3-1406233bb46b.webp",
         "text": "你与水龙展开了激烈的战斗！经过一番苦战，你终于击败了水龙，获得了光明宝石！",
         "characters": [
           {
             "name": "水龙",
-            "image": "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800",
+            "image": "/uploads/images/scenes/backgrounds/42e083ec-0389-416e-91d3-1406233bb46b.webp",
             "position": "center"
           }
         ],
@@ -421,12 +421,12 @@
     {
       "sceneKey": "dragon_talk",
       "content": {
-        "bg": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920",
+        "bg": "/uploads/images/scenes/backgrounds/42e083ec-0389-416e-91d3-1406233bb46b.webp",
         "text": "水龙看着你，眼中闪烁着智慧的光芒：'我守护光明宝石已经数百年了。只有真正勇敢和善良的人才能获得它。你证明了自己的品质。'它将宝石交给了你。",
         "characters": [
           {
             "name": "水龙",
-            "image": "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800",
+            "image": "/uploads/images/scenes/backgrounds/42e083ec-0389-416e-91d3-1406233bb46b.webp",
             "position": "center"
           }
         ],
