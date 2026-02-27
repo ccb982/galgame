@@ -4,6 +4,7 @@ import { getScene } from '../api/scene';
 import { createSave } from '../api/save';
 import { useGameStore } from '../stores/useGameStore';
 import Background from '../components/Background';
+import Character from '../components/Character';
 
 const Player = () => {
   const { gameId } = useParams();
@@ -212,35 +213,7 @@ const Player = () => {
 
       {/* 立绘 */}
       {sceneContent?.characters && sceneContent.characters.map((character, index) => (
-        <div 
-          key={index} 
-          className={`absolute ${character.position === 'left' ? 'left-8' : 'right-8'} bottom-40 z-10 transition-all duration-1000 ease-out transform`}
-          style={{
-            animation: `float ${3 + index * 0.5}s ease-in-out infinite alternate`,
-            opacity: 0,
-            animationDelay: `${index * 0.3}s`
-          }}
-          onLoad={(e) => {
-            e.currentTarget.style.opacity = 1;
-          }}
-        >
-          <div className="relative">
-            {/* 立绘图片 */}
-            <img 
-              src={character.image.startsWith('http') ? character.image : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'}${character.image}`} 
-              alt={character.name} 
-              className="h-72 object-contain drop-shadow-2xl"
-            />
-            {/* 立绘名字 */}
-            {character.name && (
-              <div className="absolute -bottom-8 left-0 right-0 flex justify-center">
-                <div className="bg-black/80 text-white px-4 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
-                  {character.name}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+        <Character key={index} character={character} index={index} />
       ))}
       
       {/* 文本框 */}
