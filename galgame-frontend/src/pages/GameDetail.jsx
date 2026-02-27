@@ -11,6 +11,15 @@ const GameDetail = () => {
   const [loading, setLoading] = useState(true);
   const visitorId = useGameStore((state) => state.visitorId);
 
+  const getCoverUrl = (coverUrl) => {
+    if (!coverUrl) return '';
+    if (coverUrl.startsWith('http')) {
+      return coverUrl;
+    }
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+    return `${apiBaseUrl}${coverUrl}`;
+  };
+
   useEffect(() => {
     const fetchGameDetail = async () => {
       try {
@@ -43,6 +52,8 @@ const GameDetail = () => {
     return <div className="flex justify-center items-center h-screen">Game not found</div>;
   }
 
+  const coverUrl = getCoverUrl(game.coverUrl);
+
   return (
     <div className="container mx-auto py-10">
       <div className="flex justify-start mb-6">
@@ -54,8 +65,8 @@ const GameDetail = () => {
       <div className="bg-gray-800 rounded-lg overflow-hidden">
         <div className="flex flex-col md:flex-row">
           <div className="w-full md:w-1/3 h-64 md:h-auto bg-gray-700">
-            {game.coverUrl ? (
-              <img src={game.coverUrl} alt={game.title} className="w-full h-full object-cover" />
+            {coverUrl ? (
+              <img src={coverUrl} alt={game.title} className="w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-gray-400">
                 无封面
