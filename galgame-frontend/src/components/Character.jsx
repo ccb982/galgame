@@ -15,6 +15,7 @@ const Character = ({ character, index, defaultHeight = 'h-56', maxHeight = '64',
 
   const characterUrl = getCharacterUrl(character.image);
   const [isLoaded, setIsLoaded] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
   const containerRef = useRef(null);
   const [verticalStyle, setVerticalStyle] = useState({ top: '50%', transform: 'translateY(-50%)' });
 
@@ -164,40 +165,79 @@ const Character = ({ character, index, defaultHeight = 'h-56', maxHeight = '64',
           }
         `}
       </style>
-      <div 
+      <div
         ref={containerRef}
-        className="absolute transition-all duration-1000 ease-out"
+        className="absolute cursor-pointer"
         style={{
-          ...mergedStyle,
+          top: mergedStyle.top,
+          left: mergedStyle.left,
+          right: mergedStyle.right,
+          transform: mergedStyle.transform,
           animation: `${animationName} ${3 + index * 0.5}s ease-in-out infinite alternate`,
           opacity: isLoaded ? 1 : 0,
           animationDelay: `${index * 0.3}s`,
-          zIndex: 10 + index
+          zIndex: isHovered ? 100 : 10 + index
         }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="relative">
+        <div 
+          className="relative transition-transform duration-300 ease-out"
+          style={{
+            transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+            filter: isHovered 
+              ? 'drop-shadow(0 0 12px rgba(255, 255, 255, 0.3)) brightness(1.05)' 
+              : 'drop-shadow(0 0 10px rgba(0, 0, 0, 0.3))',
+            transition: 'transform 0.3s ease-out, filter 0.3s ease-out'
+          }}
+        >
           {/* 角色图片 */}
-          <img 
-            src={characterUrl} 
-            alt={character.name} 
-            className={`${defaultHeight} object-contain drop-shadow-2xl`}
+          <img
+            src={characterUrl}
+            alt={character.name}
+            className={`${defaultHeight} object-contain`}
             style={{ maxHeight: `${maxHeight}rem` }}
             onLoad={() => {
               setIsLoaded(true);
               console.log('✅ 角色图片加载成功:', character.name, characterUrl);
             }}
             onError={(error) => {
-              setIsLoaded(true); // 即使加载失败也显示容器，避免元素不显示
+              setIsLoaded(true);
               console.error('❌ 角色图片加载失败:', error, character.name, characterUrl);
             }}
           />
           {/* 角色名字 */}
           {character.name && (
-            <div className="absolute -bottom-8 left-0 right-0 flex justify-center">
-              <div className="bg-black/80 text-white px-4 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
+            <div
+              className="absolute left-0 right-0 flex justify-center transition-all duration-300 ease-out"
+              style={{
+                bottom: isHovered ? '-12px' : '-8px',
+                opacity: isHovered ? 1 : 0.8,
+                transform: isHovered ? 'translateY(0) scale(1.15)' : 'translateY(0) scale(1)'
+              }}
+            >
+              <div
+                className="px-4 py-1 rounded-full text-sm font-medium backdrop-blur-sm transition-all duration-300"
+                style={{
+                  backgroundColor: isHovered ? 'rgba(0, 0, 0, 0.9)' : 'rgba(0, 0, 0, 0.8)',
+                  color: isHovered ? '#60a5fa' : '#ffffff',
+                  boxShadow: isHovered ? '0 0 20px rgba(96, 165, 250, 0.6)' : 'none'
+                }}
+              >
                 {character.name}
               </div>
             </div>
+          )}
+          {/* 悬停时的光晕效果 */}
+          {isHovered && (
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.25) 0%, transparent 70%)',
+                borderRadius: '50%',
+                transform: 'scale(1.4)'
+              }}
+            />
           )}
         </div>
       </div>

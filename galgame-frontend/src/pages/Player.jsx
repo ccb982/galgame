@@ -219,7 +219,7 @@ const Player = () => {
       
       {/* 文本框 */}
       <div 
-        className="absolute z-20 flex items-end justify-center"
+        className="absolute z-20 flex items-end justify-center pointer-events-none"
         style={{
           top: 0,
           left: 0,
@@ -239,7 +239,7 @@ const Player = () => {
           }}
         >
           <div 
-            className="backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl p-6 transition-all duration-500"
+            className="backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl p-6 transition-all duration-500 pointer-events-auto"
             style={{
               margin: 0,
               padding: '1.5rem',
