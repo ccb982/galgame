@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const Character = ({ character, index }) => {
+const Character = ({ character, index, defaultHeight = 'h-72', maxHeight = '96' }) => {
   // 处理角色图片URL
   const getCharacterUrl = (imageUrl) => {
     if (!imageUrl) return '';
@@ -41,7 +41,8 @@ const Character = ({ character, index }) => {
         <img 
           src={characterUrl} 
           alt={character.name} 
-          className="h-72 object-contain drop-shadow-2xl"
+          className={`${defaultHeight} object-contain drop-shadow-2xl`}
+          style={{ maxHeight: `${maxHeight}rem` }}
           onLoad={() => {
             setIsLoaded(true);
             console.log('✅ 角色图片加载成功:', character.name, characterUrl);
