@@ -14,7 +14,7 @@ const Home = () => {
   const fetchGames = async (page = 0) => {
     try {
       setLoading(true);
-      const response = await getGames(page, 10);
+      const response = await getGames(page, 12);
       setGames(response.data.content);
       setCurrentPage(response.data.number);
       setTotalPages(response.data.totalPages);
@@ -51,7 +51,7 @@ const Home = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-4">
+          <h1 className="text-5xl font-bold text-white mb-4">
             Galgame 游戏库
           </h1>
           <p className="text-gray-400 text-lg">
@@ -146,21 +146,22 @@ const Home = () => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 0}
-              className="px-4 py-2 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50 text-white rounded-lg font-medium transition-all duration-200 flex items-center"
+              className="px-6 py-3 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50 text-white rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7 7" />
               </svg>
+              <span>上一页</span>
             </button>
             
-            <div className="flex gap-1">
+            <div className="flex gap-2">
               {Array.from({ length: totalPages }, (_, i) => (
                 <button
                   key={i}
                   onClick={() => handlePageChange(i)}
-                  className={`w-10 h-10 px-0 py-0 rounded-lg font-medium transition-all duration-200 flex items-center justify-center ${
+                  className={`min-w-[44px] h-11 px-3 rounded-lg font-bold text-lg transition-all duration-200 flex items-center justify-center ${
                     currentPage === i
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg ring-2 ring-white ring-opacity-50 scale-110'
                       : 'bg-gray-700 hover:bg-gray-600 text-white'
                   }`}
                 >
@@ -172,8 +173,9 @@ const Home = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages - 1}
-              className="px-4 py-2 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50 text-white rounded-lg font-medium transition-all duration-200 flex items-center"
+              className="px-6 py-3 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50 text-white rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
             >
+              <span>下一页</span>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

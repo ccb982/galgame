@@ -1,7 +1,12 @@
 import axiosInstance from './axios';
 
 export const getGames = (page = 0, size = 10) => {
-  return axiosInstance.get(`/games?page=${page}&size=${size}`);
+  return axiosInstance.get(`/games?page=${page}&size=${size}`, {
+    headers: {
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache'
+    }
+  });
 };
 
 export const getGameById = (id) => {
