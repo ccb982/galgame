@@ -146,7 +146,8 @@ const Player = () => {
       hasText: !!sceneContent.text,
       hasOptions: !!sceneContent.options,
       hasBackground: !!sceneContent.bg,
-      hasCharacters: !!sceneContent.characters
+      hasCharacters: !!sceneContent.characters,
+      optionsCount: sceneContent.options?.length || 0
     });
     
   } catch (error) {
@@ -213,7 +214,7 @@ const Player = () => {
 
       {/* 立绘 */}
       {sceneContent?.characters && sceneContent.characters.map((character, index) => (
-        <Character key={index} character={character} index={index} />
+        <Character key={index} character={character} index={index} characters={sceneContent.characters} />
       ))}
       
       {/* 文本框 */}
