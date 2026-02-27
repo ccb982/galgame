@@ -51,9 +51,14 @@ const Home = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {games.map((game, index) => (
           <div key={game.id || `game-${index}`} className="bg-gray-800 rounded-lg overflow-hidden">
-            <div className="h-36 bg-gray-700 flex items-center justify-center">
+            <div className="bg-gray-700 flex items-center justify-center overflow-hidden" style={{ height: '300px' }}>
               {game.coverUrl ? (
-                <img src={`${API_BASE_URL}${game.coverUrl}`} alt={game.title} className="w-full h-full object-contain" />
+                <img 
+                  src={`${API_BASE_URL}${game.coverUrl}`} 
+                  alt={game.title} 
+                  className="object-contain" 
+                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                />
               ) : (
                 <div className="text-gray-400">无封面</div>
               )}
