@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { getGameById } from '../api/game';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { getGameById, deleteGame } from '../api/game';
 import { getSaves } from '../api/save';
 import { useGameStore } from '../stores/useGameStore';
 
@@ -8,9 +8,11 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080
 
 const GameDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [game, setGame] = useState(null);
   const [saves, setSaves] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const visitorId = useGameStore((state) => state.visitorId);
 
   const getCoverUrl = (coverUrl) => {
@@ -19,6 +21,22 @@ const GameDetail = () => {
       return coverUrl;
     }
     return `${API_BASE_URL}${coverUrl}`;
+  };
+
+  const handleDeleteGame = async () => {
+    if (window.confirm('确定要删除这个游戏吗？删除后将无法恢复，包括相关的存档和场景数据。')) {
+      try {
+        setDeleteLoading(true);
+        await deleteGame(id);
+        alert('游戏删除成功！');
+        navigate('/');
+      } catch (error) {
+        console.error('删除游戏失败:', error);
+        alert('删除游戏失败，请稍后重试。');
+      } finally {
+        setDeleteLoading(false);
+      }
+    }
   };
 
   useEffect(() => {
@@ -123,18 +141,34 @@ const GameDetail = () => {
                   ))}
                 </div>
                 
-                {/* 开始游戏按钮 */}
-                <div className="flex justify-start mb-3">
+                {/* 按钮组 */}
+                <div className="flex gap-3 mb-3 w-fit">
                   <Link 
                     to={`/play/${game.id}?scene=start`} 
-                    className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-2 rounded-lg font-bold text-base transition-all duration-200 transform hover:scale-105 shadow-lg flex items-center"
+                    className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-2 rounded-lg font-bold text-sm transition-all duration-200 transform hover:scale-105 shadow-lg flex items-center"
                   >
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     开始游戏
                   </Link>
+                  <button
+                    onClick={handleDeleteGame}
+                    disabled={deleteLoading}
+                    className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-2 rounded-lg font-bold text-sm transition-all duration-200 transform hover:scale-105 shadow-lg flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {deleteLoading ? (
+                      <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      </svg>
+                    ) : (
+                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                    )}
+                    {deleteLoading ? '删除中...' : '删除游戏'}
+                  </button>
                 </div>
               </div>
               
