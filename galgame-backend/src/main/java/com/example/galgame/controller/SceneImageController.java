@@ -10,17 +10,16 @@ import java.io.IOException;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/games/{gameId}/scene-images")
 public class SceneImageController {
     
     @Autowired
     private SceneImageService sceneImageService;
     
     /**
-     * 上传背景图片
+     * 上传背景图片（需要 gameId，兼容旧接口）
      */
-    @PostMapping("/backgrounds")
-    public ResponseEntity<Map<String, String>> uploadBackground(
+    @PostMapping("/games/{gameId}/scene-images/backgrounds")
+    public ResponseEntity<Map<String, String>> uploadBackgroundWithGameId(
             @PathVariable Long gameId,
             @RequestParam("file") MultipartFile file) throws IOException {
         
@@ -33,16 +32,44 @@ public class SceneImageController {
     }
     
     /**
-     * 上传角色图片
+     * 上传角色图片（需要 gameId，兼容旧接口）
      */
-    @PostMapping("/characters")
-    public ResponseEntity<Map<String, String>> uploadCharacter(
+    @PostMapping("/games/{gameId}/scene-images/characters")
+    public ResponseEntity<Map<String, String>> uploadCharacterWithGameId(
             @PathVariable Long gameId,
             @RequestParam("file") MultipartFile file) throws IOException {
         
         String imageUrl = sceneImageService.uploadCharacterImage(file);
         return ResponseEntity.ok(Map.of(
             "gameId", String.valueOf(gameId),
+            "imageUrl", imageUrl,
+            "type", "character"
+        ));
+    }
+    
+    /**
+     * 上传背景图片（不需要 gameId）
+     */
+    @PostMapping("/scene-images/backgrounds")
+    public ResponseEntity<Map<String, String>> uploadBackground(
+            @RequestParam("file") MultipartFile file) throws IOException {
+        
+        String imageUrl = sceneImageService.uploadBackgroundImage(file);
+        return ResponseEntity.ok(Map.of(
+            "imageUrl", imageUrl,
+            "type", "background"
+        ));
+    }
+    
+    /**
+     * 上传角色图片（不需要 gameId）
+     */
+    @PostMapping("/scene-images/characters")
+    public ResponseEntity<Map<String, String>> uploadCharacter(
+            @RequestParam("file") MultipartFile file) throws IOException {
+        
+        String imageUrl = sceneImageService.uploadCharacterImage(file);
+        return ResponseEntity.ok(Map.of(
             "imageUrl", imageUrl,
             "type", "character"
         ));

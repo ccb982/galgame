@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { createGame, createGameWithUpload } from '../../api/game';
 import { createScene } from '../../api/scene';
-import { uploadBackgroundImage, uploadCharacterImage } from '../../api/sceneImage';
+import { uploadBackgroundImage, uploadCharacterImage, uploadBackgroundImageSimple, uploadCharacterImageSimple } from '../../api/sceneImage';
 
 const Admin = () => {
   const [game, setGame] = useState({
@@ -169,18 +169,13 @@ const Admin = () => {
     e.preventDefault();
     
     try {
-      if (!selectedGameId) {
-        alert('请选择游戏');
-        return;
-      }
-      
       if (!backgroundFile) {
         alert('请选择背景图片');
         return;
       }
       
       setUploadingImage(true);
-      const response = await uploadBackgroundImage(selectedGameId, backgroundFile);
+      const response = await uploadBackgroundImageSimple(backgroundFile);
       setUploadResult({
         type: 'background',
         url: response.data.imageUrl,
@@ -201,18 +196,13 @@ const Admin = () => {
     e.preventDefault();
     
     try {
-      if (!selectedGameId) {
-        alert('请选择游戏');
-        return;
-      }
-      
       if (!characterFile) {
         alert('请选择角色图片');
         return;
       }
       
       setUploadingImage(true);
-      const response = await uploadCharacterImage(selectedGameId, characterFile);
+      const response = await uploadCharacterImageSimple(characterFile);
       setUploadResult({
         type: 'character',
         url: response.data.imageUrl,
@@ -353,26 +343,6 @@ const Admin = () => {
 
       <div className="mt-10 bg-gray-800 p-6 rounded-lg">
         <h2 className="text-2xl font-bold mb-6">上传场景图片</h2>
-        
-        <div className="mb-6">
-          <label className="block text-gray-300 mb-2">选择游戏</label>
-          <select 
-            className="w-full bg-gray-700 text-white p-2 rounded"
-            value={selectedGameId}
-            onChange={(e) => setSelectedGameId(e.target.value)}
-          >
-            <option value="">请选择游戏</option>
-            {loadingGames ? (
-              <option value="">加载中...</option>
-            ) : (
-              games.map(gameItem => (
-                <option key={gameItem.id} value={gameItem.id}>
-                  {gameItem.title}
-                </option>
-              ))
-            )}
-          </select>
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* 上传背景图片 */}
@@ -391,7 +361,7 @@ const Admin = () => {
               <button 
                 type="submit" 
                 className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white px-4 py-2 rounded"
-                disabled={uploadingImage || !selectedGameId}
+                disabled={uploadingImage}
               >
                 {uploadingImage ? '上传中...' : '上传背景图片'}
               </button>
@@ -414,7 +384,7 @@ const Admin = () => {
               <button 
                 type="submit" 
                 className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white px-4 py-2 rounded"
-                disabled={uploadingImage || !selectedGameId}
+                disabled={uploadingImage}
               >
                 {uploadingImage ? '上传中...' : '上传角色图片'}
               </button>
