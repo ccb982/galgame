@@ -18,3 +18,11 @@ galgame-frontend/node_modules/
 
 # 测试脚本文件
 character-test-script.json
+
+# 文档文件
+接口.md
+企划书.md
+图片上传.md
+游戏创建.md
+游戏中.md
+verify_clear.sql
