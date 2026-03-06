@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { generateVisitorId } from '../utils/visitorId';
 
-const useGameStore = create((set, get) => ({
+const useGameStore = create((set) => ({
   visitorId: localStorage.getItem('visitorId') || generateVisitorId(),
   currentGameId: null,
   currentScene: null,

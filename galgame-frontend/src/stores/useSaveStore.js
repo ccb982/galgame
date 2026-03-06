@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-const useSaveStore = create((set, get) => ({
+const useSaveStore = create((set) => ({
   saves: [],
   loading: false,
 
